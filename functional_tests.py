@@ -35,25 +35,29 @@ class NewVisitorTest(unittest.TestCase):
         # When he hits enter, the page updates, and now the page lists
         # "1: Buy tiny pink shirt" as an item in a to-do list
         inputbox.send_keys(Keys.ENTER)
-        time.sleep(1)
+        time.sleep(3)
 
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_elements_by_tag_name('tr')
-        self.assertTrue(
-                any(row.text == '1: Buy tiny pink shirt' for row in rows),
-                "New to-do item did not appear in table"
-                )
+        self.assertIn('1: Buy tiny pink shirt', [row.text for row in rows])
         
         # There is still a text box inviting him to add another item.
-        self.fail('Finish the test!')
-        
         # He enters "Wear tiny pink shirt and listen to Wonton Soup"
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox.send_keys('Wear tiny pink shirt and listen to Wonton Soup')
+        inputbox.send_keys(Keys.ENTER)
+        time.sleep(3)
         
         # The page updates again, and now shows both items on his list
-        
+        table = self.browser.find_element_by_id('id_list_table')
+        rows = table.find_elements_by_tag_name('tr')
+        self.assertIn('1: Buy tiny pink shirt', [row.text for row in rows])
+        self.assertIn('2: Wear tiny pink shirt and listen to Wonton Soup', [row.text for row in rows])
+
         # Little Timmy wonders if the site will remember his list.
         # Then he sees that the site has generated a unique URL for him --
         # there is some explanatory text to that effect.
+        self.fail('Finish the test!')
         
         # He visits that URL - his to do list is still there.
         
