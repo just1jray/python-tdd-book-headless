@@ -88,7 +88,7 @@ class NewVisitorTest(LiveServerTestCase):
 
         # Big Tim visits the home page. There is no sign of Little Timmy's list
         self.browser.get(self.live_server_url)
-        page_text = self.broser.find_element_by_tag_name('body').text
+        page_text = self.browser.find_element_by_tag_name('body').text
         self.assertNotIn('Buy tiny pink shirt', page_text)
         self.assertNotIn('listen to Wonton Soup', page_text)
 
