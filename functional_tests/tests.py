@@ -79,7 +79,7 @@ class NewVisitorTest(LiveServerTestCase):
 
         # Now a new user, Big Tim comes along to the site.
 
-        ## We use a new broser session to make sure that no information
+        ## We use a new browser session to make sure that no information
         ## of Little Timmy's is coming through from cookies etc
         self.browser.quit()
         chrome_options = Options()
