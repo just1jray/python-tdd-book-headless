@@ -100,7 +100,7 @@ class NewVisitorTest(LiveServerTestCase):
         self.wait_for_row_in_list_table('1: Buy cigarettes')
 
         # Big Tim gets his own unique URL
-        big_tim_list_url = seld.browser.current_url
+        big_tim_list_url = self.browser.current_url
         self.assertRegex(big_tim_list_url, '/lists/.+')
         self.assertNotEqual(big_tim_list_url, little_timmy_list_url)
 
