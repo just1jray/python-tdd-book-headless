@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import WebDriverException
 import time
+import os
 
 MAX_WAIT = 10
 
@@ -12,6 +13,9 @@ class NewVisitorTest(StaticLiveServerTestCase):
 		chrome_options = Options()
 		chrome_options.add_argument('--headless')
 		self.browser = webdriver.Chrome(options=chrome_options)
+		staging_server = os.environ.get('STAGING_SERVER')
+		if staging_server:
+			self.live_server_url = 'http://' + staging_server
 
 	def tearDown(self):
 		self.browser.quit()
